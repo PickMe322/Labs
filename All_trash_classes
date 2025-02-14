@@ -1,0 +1,96 @@
+//каждый класс нужно вставить в отдельные файлы (на верхней панели "проект"->"добавить класс")
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Laba_1._1
+{
+    internal class Trash
+    {
+        public string Trash_name { get; set; }
+        public double Trash_mass { get; set; }
+        public Trash(string trash_name, double trash_mass)
+        {
+            Trash_name = trash_name;
+            Trash_mass = trash_mass;
+        }
+    }
+}
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Laba_1._1
+{
+    internal class OrganicTrash : Trash
+    {
+        public int DamagePercent { get; set; }
+        public OrganicTrash(string organic_name, double organic_mass, int damage_percentage)
+        : base(organic_name, organic_mass)
+        {
+            DamagePercent = damage_percentage;
+        }
+    }
+}
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Laba_1._1
+{
+    internal class MetalTrash : Trash
+    {
+        public string MetalType { get; set; }
+        public MetalTrash(string metal_name, double metal_mass, string metal_type)
+        : base(metal_name, metal_mass)
+        {
+            MetalType = metal_type;
+        }
+    }
+}
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Laba_1._1
+{
+    internal class PlasticTrash : Trash
+    {
+        public bool Recycle { get; set; }
+        public PlasticTrash(string plastic_name, double plastic_mass, bool is_recyclable)
+        : base(plastic_name, plastic_mass)
+        {
+            Recycle = is_recyclable;
+        }
+    }
+}
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Laba_1._1
+{
+    internal class ToxicWastes : Trash //это не основной класс, а придуманный вами, поэтому название нужно заменить и придумать характеристику вместо ToxicityLevel
+    {
+        public int ToxicityLevel { get; set; }
+        public ToxicWastes(string toxicity_name, double toxicity_mass, int toxicity_level) : base(toxicity_name, toxicity_mass)
+        {
+            ToxicityLevel = toxicity_level;
+        }
+    }
+}
