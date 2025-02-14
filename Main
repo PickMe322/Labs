@@ -1,0 +1,42 @@
+//в списке нужно поменять слова и цифры
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Laba_1._1
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            List<Trash> trashCollection = new List<Trash>
+            {
+                new OrganicTrash("halved apple", 0.115, 70),
+                new OrganicTrash("halved pear", 0.115, 17),
+                new OrganicTrash("banana", 0.115, 10),
+                new PlasticTrash("plastic bottle", 0.2, true),
+                new MetalTrash("aluminum can", 0.05, "Aluminum"),
+                new ToxicWastes("chemical waste", 1.5, 90)
+            };
+
+            TrashSorter<PlasticTrash> plastic_sort = new TrashSorter<PlasticTrash>(trashCollection);
+            TrashSorter<OrganicTrash> organic_sort = new TrashSorter<OrganicTrash>(trashCollection);
+            TrashSorter<MetalTrash> metal_sort = new TrashSorter<MetalTrash>(trashCollection);
+            TrashSorter<ToxicWastes> toxic_sort = new TrashSorter<ToxicWastes>(trashCollection);
+
+            List<PlasticTrash> plast = plastic_sort.Sorter(trashCollection);
+            List<OrganicTrash> org = organic_sort.Sorter(trashCollection);
+            List<MetalTrash> met = metal_sort.Sorter(trashCollection);
+            List<ToxicWastes> tox = toxic_sort.Sorter(trashCollection);
+
+            Console.WriteLine(organic_sort.Print(org));
+            Console.WriteLine(metal_sort.Print(met));
+            Console.WriteLine(plastic_sort.Print(plast));
+            Console.WriteLine(toxic_sort.Print(tox));
+
+        }
+    }
+}
