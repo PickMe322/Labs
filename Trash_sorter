@@ -1,0 +1,56 @@
+//общий сортировщик для любого типа мусора. Содержит методы сортировки и вывода данных
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Laba_1._1
+{
+    internal class TrashSorter<T>
+    {
+        public List<Trash> all_trash = new List<Trash>();
+        public TrashSorter(List<Trash> all_trash)
+        {
+            this.all_trash = all_trash;
+        }
+
+        public List<T> Sorter(List<Trash> all_trash)
+        {
+            List<T> result = new List<T>();
+            foreach (var trash in all_trash)
+            {
+                if (trash is T item)
+                {
+                    result.Add(item);
+                }
+            }
+            return result;
+        }
+        public string Print(List<T> collection)
+        {
+            string result = $"\t\t\t\t\t\t{typeof(T).Name}";
+            foreach (T item in collection)
+            {
+                if (item is PlasticTrash plasticTrash)
+                {
+                    result += $"\n\nTrash name: {plasticTrash.Trash_name}\nTrash weight: {plasticTrash.Trash_mass} kg\nIs recycle: {plasticTrash.Recycle}\n\n";
+                }
+                else if (item is MetalTrash metalTrash)
+                {
+                    result += $"\n\nTrash name: {metalTrash.Trash_name}\nTrash weight: {metalTrash.Trash_mass} kg\nMetal type: {metalTrash.MetalType}\n\n";
+                }
+                else if (item is OrganicTrash organicTrash)
+                {
+                    result += $"\n\nTrash name: {organicTrash.Trash_name}\nTrash weight: {organicTrash.Trash_mass} kg\nDamage percent: {organicTrash.DamagePercent}%\n\n";
+                }
+                else if (item is ToxicWastes toxicWaste)
+                {
+                    result += $"\n\nTrash name: {toxicWaste.Trash_name}\nTrash weight: {toxicWaste.Trash_mass} kg\nToxicity level: {toxicWaste.ToxicityLevel}%\n\n";
+                }
+            }
+            return result;
+        }
+    }
+}
