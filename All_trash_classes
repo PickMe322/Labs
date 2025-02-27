@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Laba_1._1
 {
-    internal class Trash
+    internal abstract class Trash
     {
         public string Trash_name { get; set; }
         public double Trash_mass { get; set; }
@@ -17,14 +17,21 @@ namespace Laba_1._1
             Trash_name = trash_name;
             Trash_mass = trash_mass;
         }
+        public virtual string GetInfo()
+        {
+            string result = $"Name: {Trash_name}\nMass: {Trash_mass}";
+            return result;
+        } 
     }
 }
+
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Laba_1._1
 {
@@ -35,6 +42,10 @@ namespace Laba_1._1
         : base(organic_name, organic_mass)
         {
             DamagePercent = damage_percentage;
+        }
+        public override string GetInfo()
+        {
+            return $"Название: {Trash_name}, Масса: {Trash_mass} кг\nСтепень повреждения: {DamagePercent}%";
         }
     }
 }
@@ -55,9 +66,12 @@ namespace Laba_1._1
         {
             MetalType = metal_type;
         }
+        public override string GetInfo()
+        {
+            return $"Название: {Trash_name}, Масса: {Trash_mass} кг\nТип металла: {MetalType}";
+        }
     }
 }
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -74,8 +88,13 @@ namespace Laba_1._1
         {
             Recycle = is_recyclable;
         }
+        public override string GetInfo()
+        {
+            return $"Название: {Trash_name}, Масса: {Trash_mass} кг\nПереработка: {Recycle}";
+        }
     }
 }
+
 
 using System;
 using System.Collections.Generic;
@@ -85,12 +104,17 @@ using System.Threading.Tasks;
 
 namespace Laba_1._1
 {
-    internal class ToxicWastes : Trash //это не основной класс, а придуманный вами, поэтому название нужно заменить и придумать характеристику вместо ToxicityLevel
+    internal class ToxicWastes : Trash
     {
         public int ToxicityLevel { get; set; }
         public ToxicWastes(string toxicity_name, double toxicity_mass, int toxicity_level) : base(toxicity_name, toxicity_mass)
         {
             ToxicityLevel = toxicity_level;
         }
+        public override string GetInfo()
+        {
+            return $"Название: {Trash_name}, Масса: {Trash_mass} кг\nУровень токсичности: {ToxicityLevel}";
+        }
+
     }
 }
