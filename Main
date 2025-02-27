@@ -14,29 +14,30 @@ namespace Laba_1._1
         {
             List<Trash> trashCollection = new List<Trash>
             {
-                new OrganicTrash("halved apple", 0.115, 70),
-                new OrganicTrash("halved pear", 0.115, 17),
-                new OrganicTrash("banana", 0.115, 10),
-                new PlasticTrash("plastic bottle", 0.2, true),
-                new MetalTrash("aluminum can", 0.05, "Aluminum"),
-                new ToxicWastes("chemical waste", 1.5, 90)
+                new OrganicTrash("Груша", 0.2, 15),
+                new MetalTrash("Гвоздь", 0.05, "Сталь"),
+                new PlasticTrash("Полиэтиленовый пакет", 0.1, true),
+                new ToxicWastes("Ртутный термометр", 0.2, 50),
+                new OrganicTrash("Дыня", 0.2, 70),
+                new MetalTrash("Алюминиевая банка", 0.08, "Алюминий"),
+                new PlasticTrash("Пластиковая упаковка", 0.1, false),
+                new ToxicWastes("Просроченные лекарства", 0.15, 11)
             };
 
-            TrashSorter<PlasticTrash> plastic_sort = new TrashSorter<PlasticTrash>(trashCollection);
-            TrashSorter<OrganicTrash> organic_sort = new TrashSorter<OrganicTrash>(trashCollection);
-            TrashSorter<MetalTrash> metal_sort = new TrashSorter<MetalTrash>(trashCollection);
-            TrashSorter<ToxicWastes> toxic_sort = new TrashSorter<ToxicWastes>(trashCollection);
+            var organicSorter = new TrashSorter<OrganicTrash>();
+            var metalSorter = new TrashSorter<MetalTrash>();
+            var plasticSorter = new TrashSorter<PlasticTrash>();
+            var batterySorter = new TrashSorter<ToxicWastes>();
 
-            List<PlasticTrash> plast = plastic_sort.Sorter(trashCollection);
-            List<OrganicTrash> org = organic_sort.Sorter(trashCollection);
-            List<MetalTrash> met = metal_sort.Sorter(trashCollection);
-            List<ToxicWastes> tox = toxic_sort.Sorter(trashCollection);
+            var remainingTrash = organicSorter.FilterTrash(trashCollection);
+            remainingTrash = metalSorter.FilterTrash(remainingTrash);
+            remainingTrash = plasticSorter.FilterTrash(remainingTrash);
+            remainingTrash = batterySorter.FilterTrash(remainingTrash);
 
-            Console.WriteLine(organic_sort.Print(org));
-            Console.WriteLine(metal_sort.Print(met));
-            Console.WriteLine(plastic_sort.Print(plast));
-            Console.WriteLine(toxic_sort.Print(tox));
-
+            Console.WriteLine((organicSorter.DisplayInfo()));
+            Console.WriteLine(metalSorter.DisplayInfo());
+            Console.WriteLine(plasticSorter.DisplayInfo());
+            Console.WriteLine((batterySorter.DisplayInfo()));
         }
     }
 }
