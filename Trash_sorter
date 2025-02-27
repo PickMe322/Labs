@@ -8,47 +8,40 @@ using System.Threading.Tasks;
 
 namespace Laba_1._1
 {
-    internal class TrashSorter<T>
+    internal class TrashSorter<T> where T : Trash
     {
-        public List<Trash> all_trash = new List<Trash>();
-        public TrashSorter(List<Trash> all_trash)
+        public List<T> sortedTrash = new List<T>();
+        public void AddTrash(T trash)
         {
-            this.all_trash = all_trash;
+            sortedTrash.Add(trash);
         }
 
-        public List<T> Sorter(List<Trash> all_trash)
+        public List<Trash> FilterTrash(List<Trash> trashCollection)
         {
-            List<T> result = new List<T>();
-            foreach (var trash in all_trash)
+            List<Trash> remainingTrash = new List<Trash>();
+
+            foreach (var trash in trashCollection)
             {
-                if (trash is T item)
+                if (trash is T ob)
                 {
-                    result.Add(item);
+                    AddTrash(ob);
+                }
+                else
+                {
+                    remainingTrash.Add(trash);
                 }
             }
-            return result;
+            return remainingTrash;
         }
-        public string Print(List<T> collection)
+
+        public string DisplayInfo()
         {
-            string result = $"\t\t\t\t\t\t{typeof(T).Name}";
-            foreach (T item in collection)
+            string result = $"\nТип мусора: {typeof(T).Name}:\n";
+
+            foreach (var ob in sortedTrash)
             {
-                if (item is PlasticTrash plasticTrash)
-                {
-                    result += $"\n\nTrash name: {plasticTrash.Trash_name}\nTrash weight: {plasticTrash.Trash_mass} kg\nIs recycle: {plasticTrash.Recycle}\n\n";
-                }
-                else if (item is MetalTrash metalTrash)
-                {
-                    result += $"\n\nTrash name: {metalTrash.Trash_name}\nTrash weight: {metalTrash.Trash_mass} kg\nMetal type: {metalTrash.MetalType}\n\n";
-                }
-                else if (item is OrganicTrash organicTrash)
-                {
-                    result += $"\n\nTrash name: {organicTrash.Trash_name}\nTrash weight: {organicTrash.Trash_mass} kg\nDamage percent: {organicTrash.DamagePercent}%\n\n";
-                }
-                else if (item is ToxicWastes toxicWaste)
-                {
-                    result += $"\n\nTrash name: {toxicWaste.Trash_name}\nTrash weight: {toxicWaste.Trash_mass} kg\nToxicity level: {toxicWaste.ToxicityLevel}%\n\n";
-                }
+                result += ob.GetInfo() + "\n";
+
             }
             return result;
         }
